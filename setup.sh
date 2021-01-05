@@ -48,7 +48,8 @@ CASKS=(
 	vlc
 	skype
 	autodesk-fusion360
-	moneymoneycomposer
+	moneymoney
+	composer
 	lens
 )
 
