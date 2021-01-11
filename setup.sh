@@ -23,6 +23,8 @@ PACKAGES=(
 	yarn
 	kubectl
 	kubectx
+	exa
+	stern
 )
 
 echo "Installing packages..."
@@ -51,6 +53,10 @@ CASKS=(
 	moneymoney
 	composer
 	lens
+	kap
+	dash
+	teamviewer
+	docker
 )
 
 echo "Installing cask apps..."
