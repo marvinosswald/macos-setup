@@ -14,6 +14,7 @@ brew update
 
 PACKAGES=(
 	git
+	git-lfs
 	python
 	zsh
 	php
@@ -25,6 +26,7 @@ PACKAGES=(
 	kubectx
 	exa
 	stern
+	helm
 )
 
 echo "Installing packages..."
@@ -51,7 +53,6 @@ CASKS=(
 	skype
 	autodesk-fusion360
 	moneymoney
-	composer
 	lens
 	kap
 	dash
@@ -62,21 +63,28 @@ CASKS=(
 echo "Installing cask apps..."
 brew install --cask ${CASKS[@]}
 
-echo "Install prezto"
-
-if [ ! -d $HOME/.prezto ]; then
+if [ ! -d $HOME/.zprezto ]; then
+	echo "Install prezto"
 	git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 	setopt EXTENDED_GLOB
 fi
 
-echo "Set ZSH as default"
-
-chsh -s /bin/zsh
+if [ "$SHELL" != "/bin/zsh" ]; then
+	echo "Set ZSH as default"
+	chsh -s /bin/zsh
+fi
 
 echo "Install Valet"
 if test ! $(which valet); then
 	composer global require laravel/valet
 	valet install
+fi
+
+if [ ! -f $HOME/.gitconfig ]; then
+	echo "Setup Git"
+	cp ./templates/gitconfig.template $HOME/.gitconfig
+	sed -i "" "s/{{NAME}}/Marvin Osswald/g" $HOME/.gitconfig
+	sed -i "" "s/{{EMAIL}}/mail@marvinosswald.de/g" $HOME/.gitconfig
 fi
 
 echo "MacOS Setup completed 🤘"
