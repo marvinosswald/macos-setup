@@ -27,6 +27,7 @@ PACKAGES=(
 	exa
 	stern
 	helm
+	git-flow-avh
 )
 
 echo "Installing packages..."
