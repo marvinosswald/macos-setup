@@ -12,6 +12,13 @@ fi
 # Update homebrew recipes
 brew update
 
+TAPS=(
+	AdoptOpenJDK/openjdk
+)
+
+echo "Adding taps..."
+brew tap ${TAPS[@]}
+
 PACKAGES=(
 	git
 	git-lfs
@@ -28,6 +35,9 @@ PACKAGES=(
 	stern
 	helm
 	git-flow-avh
+	redis
+	mas
+	maven
 )
 
 echo "Installing packages..."
@@ -59,10 +69,27 @@ CASKS=(
 	dash
 	teamviewer
 	docker
+	adoptopenjdk8
+	#sidequest
+	postman
+	private-internet-access
+	transmission
 )
 
 echo "Installing cask apps..."
 brew install --cask ${CASKS[@]}
+
+APPSTORE_APPS=(
+	822514576  # SonicWall Mobile Connect
+	1295203466 # Microsoft Remote Desktop
+	497799835 # Xcode
+	409203825 # Numbers
+	409201541 # Pages
+	
+)
+
+echo "Installing app store apps..."
+mas install ${APPSTORE_APPS[@]}
 
 if [ ! -d $HOME/.zprezto ]; then
 	echo "Install prezto"
