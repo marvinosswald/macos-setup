@@ -38,6 +38,9 @@ PACKAGES=(
 	redis
 	mas
 	maven
+	gradle
+	httpie
+	ngrok
 )
 
 echo "Installing packages..."

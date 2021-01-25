@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
+exec < /dev/tty
+$HOME/.iterm2/imgcat -u https://media.giphy.com/media/l0HlKrB02QY0f1mbm/source.gif
+if cd microservices && mvn prettier:check -T 1C >/dev/null 2>&1
+then
+	exit 0
+else
+	clear
+	echo "PRETTIER FAILED"
+	read -p "Would you like to fix this now? [y/n] " -n 1 -r
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		clear
+		echo "WELL WAIT SOME MORE THEN"
+	    mvn prettier:write -T >/dev/null 1C && cd ../
+	    clear
+	    $HOME/.iterm2/imgcat -u https://media.giphy.com/media/15BuyagtKucHm/source.gif
+	fi
+
+	exit 1
+fi
